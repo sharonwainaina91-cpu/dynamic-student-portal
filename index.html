@@ -3,42 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Student Portal</title>
-  <link rel="stylesheet" href="styles.css"> 
-  
-  <style>
-    h2 { color: green; }
-</style>
+    <title>Dynamic Student Portal - Home</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Header Section with Navigation -->
+    <!-- Header & Flexbox Navigation -->
     <header>
         <h1>Dynamic Student Portal</h1>
         <nav>
-            <a href="index.html">Home</a> | 
-            <a href="timetable.html">Timetable</a> | 
+            <a href="index.html">Home</a>
+            <a href="timetable.html">Timetable</a>
             <a href="register.html">Register</a>
         </nav>
     </header>
 
-    <hr>
+    <!-- CSS Grid Layout Section (Lab 6) -->
+    <main class="grid-container">
+        <!-- Column 1: Main Content -->
+        <section class="main-card">
+            <h2>Welcome to the Portal</h2>
+            <p>This is your one-stop portal for viewing your weekly class schedules, registering for upcoming courses, and accessing campus resources.</p>
+            <br>
+            <img src="https://via.placeholder.com/600x200" alt="Student Portal Banner" style="width: 100%; border-radius: 4px;">
+        </section>
 
-    <!-- Main Content Area -->
-    <main>
-        <h2 style="color: red;">Welcome to the Portal</h2>
-        <p>This is your one-stop portal for viewing your weekly class schedules, registering for upcoming courses, and accessing campus resources.</p>
-        
-        <!-- Banner Image -->
-        <img src="https://via.placeholder.com/600x200" alt="Student Portal Banner" width="600">
+        <!-- Column 2: Sidebar -->
+        <aside class="sidebar-card">
+            <h3>Quick Announcements</h3>
+            <ul>
+                <li>Mid-semester exams start next month.</li>
+                <li>Submit your Lab assignments on GitHub.</li>
+                <li>Library hours extended during exam week.</li>
+            </ul>
+        </aside>
     </main>
 
-    <hr>
-
-    <!-- Footer Section -->
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Dynamic Student Portal. All rights reserved.</p>
     </footer>
 
 </body>
 </html>
+```[cite: 8]
+
+---
