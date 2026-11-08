@@ -1,0 +1,7 @@
+[
+    { "name": "Aisha Khan", "course": "Web Application Development", "year": 2 },
+    { "name": "Diego Ramirez", "course": "Database Systems", "year": 1 },
+    { "name": "Amara Okafor", "course": "Software Engineering", "year": 3 },
+    { "name": "Liam Foster", "course": "Cyber Security", "year": 2 },
+    { "name": "Priya Nair", "course": "Data Science", "year": 1 }
+]

@@ -1,61 +1,67 @@
-// Lab 7 & 8: Portal Script
+// Lab 7, 8 & 9: Portal Script
 
-// --- Lab 7 Logic ---
 console.log("Portal script loaded successfully.");
 
-let studentName = "Aisha Khan";
-let yearOfStudy = 2;
-
-if (yearOfStudy === 1) {
-    console.log(studentName + " is a First-Year Student.");
-} else {
-    console.log(studentName + " is in Year " + yearOfStudy + ".");
-}
-
-// --- Lab 8 Logic: Functions, Arrays & Events ---
-
-// 1. Hardcoded Array of Students
-const students = [
-    "Aisha Khan",
-    "Diego Ramirez",
-    "Amara Okafor",
-    "Liam Foster",
-    "Priya Nair"
-];
-
-// 2. Function to Append a Single Student to the DOM
-function addStudentToPage(name) {
+// 1. Add student to DOM using object properties
+function addStudentToPage(studentObj) {
     const listElement = document.getElementById("student-list");
     if (listElement) {
         const listItem = document.createElement("li");
-        listItem.textContent = name;
+        listItem.textContent = `${studentObj.name} - ${studentObj.course} (Yr ${studentObj.year})`;
         listElement.appendChild(listItem);
     }
 }
 
-// 3. Function to Loop and Display All Students
-function displayAllStudents(studentArray) {
+// 2. Display all students and update total student count
+function displayAllStudents(studentsArray) {
     const listElement = document.getElementById("student-list");
+    const countElement = document.getElementById("student-count");
+
     if (listElement) {
-        listElement.innerHTML = ""; // Clear existing items to avoid duplicates
-        studentArray.forEach(function (student) {
+        listElement.innerHTML = ""; // Clear existing list
+        studentsArray.forEach(function (student) {
             addStudentToPage(student);
         });
     }
+
+    if (countElement) {
+        countElement.textContent = studentsArray.length;
+    }
 }
 
-// 4. Attach Click Event Listener to the Button
+// 3. Fetch API implementation with error handling
+function fetchStudentData() {
+    fetch("students.json")
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error("HTTP error! Status: " + response.status);
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            displayAllStudents(data);
+        })
+        .catch(function (error) {
+            console.error("Error fetching student data:", error);
+            const listElement = document.getElementById("student-list");
+            if (listElement) {
+                listElement.innerHTML = "<li style='color: red;'>Failed to load student data.</li>";
+            }
+        });
+}
+
+// 4. Attach Event Listener
 document.addEventListener("DOMContentLoaded", function () {
     const showBtn = document.getElementById("show-students-btn");
     if (showBtn) {
         showBtn.addEventListener("click", function () {
-            displayAllStudents(students);
-            showBtn.disabled = true; // Disable button after click
-            showBtn.textContent = "Students Displayed";
+            fetchStudentData();
+            showBtn.disabled = true;
+            showBtn.textContent = "Data Loaded";
         });
     }
 
-    // Lab 7 Form Validation Listener
+    // Form Validation (Register Page)
     const registerForm = document.querySelector("form");
     if (registerForm) {
         registerForm.addEventListener("submit", function (event) {
