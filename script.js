@@ -1,12 +1,8 @@
-// Lab 7: JavaScript Overview & Embedding
+// Lab 7 & 8: Portal Script
 
-// 1. Alert welcome message on page load
-alert("Welcome to the Dynamic Student Portal!");
-
-// 2. Log message to browser console
+// --- Lab 7 Logic ---
 console.log("Portal script loaded successfully.");
 
-// 3. Variables and Conditionals
 let studentName = "Aisha Khan";
 let yearOfStudy = 2;
 
@@ -16,21 +12,57 @@ if (yearOfStudy === 1) {
     console.log(studentName + " is in Year " + yearOfStudy + ".");
 }
 
-// 4. For Loop (Logs numbers 1 to 5)
-console.log("Printing semester numbers:");
-for (let i = 1; i <= 5; i++) {
-    console.log("Semester " + i);
+// --- Lab 8 Logic: Functions, Arrays & Events ---
+
+// 1. Hardcoded Array of Students
+const students = [
+    "Aisha Khan",
+    "Diego Ramirez",
+    "Amara Okafor",
+    "Liam Foster",
+    "Priya Nair"
+];
+
+// 2. Function to Append a Single Student to the DOM
+function addStudentToPage(name) {
+    const listElement = document.getElementById("student-list");
+    if (listElement) {
+        const listItem = document.createElement("li");
+        listItem.textContent = name;
+        listElement.appendChild(listItem);
+    }
 }
 
-// 5. Form validation listener
+// 3. Function to Loop and Display All Students
+function displayAllStudents(studentArray) {
+    const listElement = document.getElementById("student-list");
+    if (listElement) {
+        listElement.innerHTML = ""; // Clear existing items to avoid duplicates
+        studentArray.forEach(function (student) {
+            addStudentToPage(student);
+        });
+    }
+}
+
+// 4. Attach Click Event Listener to the Button
 document.addEventListener("DOMContentLoaded", function () {
+    const showBtn = document.getElementById("show-students-btn");
+    if (showBtn) {
+        showBtn.addEventListener("click", function () {
+            displayAllStudents(students);
+            showBtn.disabled = true; // Disable button after click
+            showBtn.textContent = "Students Displayed";
+        });
+    }
+
+    // Lab 7 Form Validation Listener
     const registerForm = document.querySelector("form");
     if (registerForm) {
         registerForm.addEventListener("submit", function (event) {
             const nameInput = document.getElementById("fullname");
             if (nameInput && nameInput.value.trim() === "") {
                 alert("Please enter your full name before submitting.");
-                event.preventDefault(); // Stop form submission
+                event.preventDefault();
             }
         });
     }
